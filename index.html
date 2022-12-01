@@ -16,9 +16,13 @@
 
 </head>
 <body>
-    <div></div>
+    <!-- for background -->
+    <div></div> 
+    <!--  app container -->
     <div class="container-lg row" id="app">
+        <!-- menu window -->
         <div class="menu_window col-sm-4 d-none d-sm-block">
+            <!-- menu upperbar -->
             <div class="menu_upperbar">
                 <div class="profilecircle">
                     <img src="img/avatar_io.jpg" alt="">
@@ -27,119 +31,121 @@
                     <div class="profilename">Sofia</div>
                 </div>
                 <div class="upperbar_options">
-                    <i class="fa-solid fa-circle-notch fa-fw fa-spin"></i>
-                    <i class="fa-solid fa-message fa-fw"></i>
-                    <i class="fa-solid fa-ellipsis-vertical fa-fw"></i>
+                    <i class="fa-solid fa-circle-notch fa-fw fa-spin fa-lg"></i>
+                    <i class="fa-solid fa-message fa-fw fa-lg"></i>
+                    <i class="fa-solid fa-ellipsis-vertical fa-lg fa-fw"></i>
                 </div>
             </div>
+            <!-- notification -->
             <div class="notification">
                 <div class="profilecircle">
-                    <i class="fa-solid fa-bell-slash " style="color: rgb(154, 226, 233);"></i>
+                    <i class="fa-solid fa-bell-slash fa-xl" style="color: rgb(154, 226, 233);"></i>
                 </div>
                 <div>
-                    <h7>Ricevi notifiche di nuovi messaggi</h7>
+                    <h6>Ricevi notifiche di nuovi messaggi</h6>
                     <div>
                         <a href="">attiva le notifiche</a>
                     </div>
                 </div>
 
             </div>
+
+            <!-- chat search -->
             <div class="menu_search">
                 <div class="input-group-sm">
                     <i class="fa fa-search" aria-hidden="true"></i>
                     <input type="text" placeholder="Search chats">
                 </div>
             </div>
+
+            <!-- chat list -->
             <div class="menu_chatlist">
-                <div class="chatlist_card chat_active">
+                <!-- generate chatcard from vue -->
+                <div class="chatlist_card" v-for="(item, i) in contacts" @click="chatSelect(i)" :class="index === i ? 'chat_active' : ''">
+
+                    <!-- prof image -->
                     <div class="profilecircle">
-                        <img src="img/avatar_io.jpg" alt="">
+                        <img :src="'img/avatar'+item.avatar+'.jpg'" :alt="item.name">
                     </div>
+
+                    <!-- prof info -->
                     <div class="profile_info">
-                        <div class="profilename">Sofia</div>
-                        <div class="lastchat">
-                            Ultimo messaggio
+                        <!-- name -->
+                        <div class="profilename" v-cloak>{{item.name}}</div>
+                        <!-- last chat -->
+                        <div class="lastchat" v-cloak>
+                            {{}}
                         </div>
                     </div>
-                    <div class="lastchat_time">
-                        time
-                    </div>
-                </div>
-                <div class="chatlist_card">
-                    <div class="profilecircle">
-                        <img src="img/avatar_io.jpg" alt="">
-                    </div>
-                    <div class="profile_info">
-                        <div class="profilename">Sofia</div>
-                        <div class="lastchat">
-                            Ultimo messaggio
-                        </div>
-                    </div>
-                    <div class="lastchat_time">
-                        time
-                    </div>
-                </div>
-                <div class="chatlist_card">
-                    <div class="profilecircle">
-                        <img src="img/avatar_io.jpg" alt="">
-                    </div>
-                    <div class="profile_info">
-                        <div class="profilename">Sofia</div>
-                        <div class="lastchat">
-                            Ultimo messaggio
-                        </div>
-                    </div>
+
+                    <!-- last chat time -->
                     <div class="lastchat_time">
                         time
                     </div>
                 </div>
             </div>
         </div>
+        <!-- chat window -->
         <div class="chat_window col-sm-8">
+            <!-- chat upperbar -->
             <div class="chat_window_upperbar">
+                <!-- for small device -->
                 <div class="d-block d-sm-none pe-4 ps-2">
                     <i class="fa-solid fa-chevron-left fa-fw fa-beat"></i>
                 </div>
+                <!-- prof image -->
                 <div class="profilecircle">
-                    <img src="img/avatar_io.jpg" alt="">
+                    <img :src="'img/avatar'+contacts[index].avatar+'.jpg'" :alt="contacts[index].name">
                 </div>
+                <!-- prof info -->
                 <div class="profile_info">
-                    <div class="profilename">Sofia</div>
-                    <div class="lastchat">
-                        Ultimo messaggio
+                    <!-- name -->
+                    <div class="profilename" v-cloak>{{contacts[index].name}}</div>
+                    <!-- last login time -->
+                    <div class="lastchat" v-cloak>
+                        online status
                     </div>
                 </div>
+                <!-- upperbar options -->
                 <div class="upperbar_options">
-                    <i class="fa-solid fa-search fa-fw"></i>
-                    <i class="fa-solid fa-paperclip fa-fw"></i>
-                    <i class="fa-solid fa-ellipsis-vertical fa-fw"></i>
+                    <i class="fa-solid fa-search fa-fw fa-lg"></i>
+                    <i class="fa-solid fa-paperclip fa-fw  fa-lg"></i>
+                    <i class="fa-solid fa-ellipsis-vertical fa-fw  fa-lg"></i>
                 </div>
             </div>
+
+            <!-- chat content (column-reverse)-->
+
             <div class="chat_window_content" style="background-image: url('img/mine.jpg');">
-                <div class="message">
-                    <div class="message_content">
-                        hey
-                    </div>
-                    <div class="message_info">
-                        00:00
-                    </div>
-                </div>
-                <div class="message received">
-                    <div class="message_content">
-                        hey
-                    </div>
-                    <div class="message_info">
-                        00:00
+
+                <!-- chat wrapper (column) -->
+                <div class="chat_window_chat_wrapper">
+
+                    <!-- generate chat from vue -->
+                    <div class="message" v-for="(item, index2) in contacts[index].messages" :class="item.status === 'received' ? 'received' : ''">
+                        <!-- chat text -->
+                        <div class="message_content" v-cloak>
+                            {{item.message}}
+                        </div>
+                        <!-- chat time -->
+                        <div class="message_info">
+                            00:00
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- chat bottombar -->
             <div class="chat_window_bottom">
                 <div>
-                    <i class="fa-regular fa-face-smile fa-fw"></i>
+                    <i class="fa-regular fa-face-smile fa-fw fa-lg"></i>
                 </div>
-                <input type="text">
-                <div>
-                    <i class="fa-solid fa-microphone"></i>
+                <!-- chat input -->
+                <input type="text" v-model="chatInput" @keyup.enter="send()">
+
+                <!-- sent button -->
+                <div @click="send()">
+                    <i class="fa-solid fa-paper-plane fa-fw fa-xl" style="color: rgb(65, 160, 255);"></i>
                 </div>
             </div>
         </div>
