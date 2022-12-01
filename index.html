@@ -18,15 +18,15 @@
 <body>
     <div></div>
     <div class="container-lg row" id="app">
-        <div class="menu_window col-2 col-md-4">
+        <div class="menu_window col-sm-4 d-none d-sm-block">
             <div class="menu_upperbar">
-                <div class="menu_upperbar_profile">
-                    <div class="profilecircle">
-                        <img src="img/avatar_io.jpg" alt="">
-                    </div>
-                    <span class="profilename">Sofia</span>
+                <div class="profilecircle">
+                    <img src="img/avatar_io.jpg" alt="">
                 </div>
-                <div class="menu_upperbar_options">
+                <div class="profile_info">
+                    <div class="profilename">Sofia</div>
+                </div>
+                <div class="upperbar_options">
                     <i class="fa-solid fa-circle-notch fa-fw fa-spin"></i>
                     <i class="fa-solid fa-message fa-fw"></i>
                     <i class="fa-solid fa-ellipsis-vertical fa-fw"></i>
@@ -95,9 +95,53 @@
                 </div>
             </div>
         </div>
-        <div class="chat_window col-10 col-md-8">
-            <div>abc</span>
-            <span>abc</span>
+        <div class="chat_window col-sm-8">
+            <div class="chat_window_upperbar">
+                <div class="d-block d-sm-none pe-4 ps-2">
+                    <i class="fa-solid fa-chevron-left fa-fw fa-beat"></i>
+                </div>
+                <div class="profilecircle">
+                    <img src="img/avatar_io.jpg" alt="">
+                </div>
+                <div class="profile_info">
+                    <div class="profilename">Sofia</div>
+                    <div class="lastchat">
+                        Ultimo messaggio
+                    </div>
+                </div>
+                <div class="upperbar_options">
+                    <i class="fa-solid fa-search fa-fw"></i>
+                    <i class="fa-solid fa-paperclip fa-fw"></i>
+                    <i class="fa-solid fa-ellipsis-vertical fa-fw"></i>
+                </div>
+            </div>
+            <div class="chat_window_content" style="background-image: url('img/mine.jpg');">
+                <div class="message">
+                    <div class="message_content">
+                        hey
+                    </div>
+                    <div class="message_info">
+                        00:00
+                    </div>
+                </div>
+                <div class="message received">
+                    <div class="message_content">
+                        hey
+                    </div>
+                    <div class="message_info">
+                        00:00
+                    </div>
+                </div>
+            </div>
+            <div class="chat_window_bottom">
+                <div>
+                    <i class="fa-regular fa-face-smile fa-fw"></i>
+                </div>
+                <input type="text">
+                <div>
+                    <i class="fa-solid fa-microphone"></i>
+                </div>
+            </div>
         </div>
     </div>
 </body>
