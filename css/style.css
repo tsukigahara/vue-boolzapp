@@ -164,6 +164,7 @@ body>:first-child {
     text-align: end;
     align-self: flex-start;
     color: gray;
+    font-size: 12px;
 }
 
 /* chat window */
@@ -207,6 +208,16 @@ body>:first-child {
 
 
 /* message */
+
+.chat_date {
+    margin: 20px 0;
+    align-self: center;
+    padding: 2.5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.386);
+}
 
 .message {
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Hyperchats</title>
     <script src="https://kit.fontawesome.com/9344ff345c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css
     ">
@@ -54,7 +54,8 @@
             <div class="menu_search">
                 <div class="input-group-sm">
                     <i class="fa fa-search" aria-hidden="true"></i>
-                    <input type="text" placeholder="Search chats">
+                    <input type="text" placeholder="Search chats"
+                    v-model="search">
                 </div>
             </div>
 
@@ -74,13 +75,13 @@
                         <div class="profilename" v-cloak>{{item.name}}</div>
                         <!-- last chat -->
                         <div class="lastchat" v-cloak>
-                            {{}}
+                            {{item.messages[item.messages.length - 1].message}}
                         </div>
                     </div>
 
                     <!-- last chat time -->
-                    <div class="lastchat_time">
-                        time
+                    <div class="lastchat_time" v-cloak>
+                        {{fullDate(item.messages[item.messages.length - 1].date)}}
                     </div>
                 </div>
             </div>
@@ -90,7 +91,7 @@
             <!-- chat upperbar -->
             <div class="chat_window_upperbar">
                 <!-- for small device -->
-                <div class="d-block d-sm-none pe-4 ps-2">
+                <div class="d-block d-sm-none pe-4 ps-2" @click="backtomenu()">
                     <i class="fa-solid fa-chevron-left fa-fw fa-beat"></i>
                 </div>
                 <!-- prof image -->
@@ -122,16 +123,21 @@
                 <div class="chat_window_chat_wrapper">
 
                     <!-- generate chat from vue -->
-                    <div class="message" v-for="(item, index2) in contacts[index].messages" :class="item.status === 'received' ? 'received' : ''">
-                        <!-- chat text -->
-                        <div class="message_content" v-cloak>
-                            {{item.message}}
+                    <template v-for="(item, index2) in contacts[index].messages">
+                        <div class="chat_date" v-if="chatDate(item.date, index, index2)">
+                            {{fullDate(item.date, 1)}}
                         </div>
-                        <!-- chat time -->
-                        <div class="message_info">
-                            00:00
+                        <div class="message" :class="item.status === 'received' ? 'received' : ''">
+                            <!-- chat text -->
+                            <div class="message_content" v-cloak>
+                                {{item.message}}
+                            </div>
+                            <!-- chat time -->
+                            <div class="message_info">
+                                {{time(item.date)}}
+                            </div>
                         </div>
-                    </div>
+                    </template>
                 </div>
             </div>
 
@@ -141,7 +147,7 @@
                     <i class="fa-regular fa-face-smile fa-fw fa-lg"></i>
                 </div>
                 <!-- chat input -->
-                <input type="text" v-model="chatInput" @keyup.enter="send()">
+                <input type="text" v-model="chatInput" @keyup.enter="send()" placeholder="Type a message...">
 
                 <!-- sent button -->
                 <div @click="send()">
